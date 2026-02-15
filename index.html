@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Developer Portfolio | Frontend & C++</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --primary: #00d2ff;
+            --secondary: #92fe9d;
+            --bg-dark: #0f172a;
+            --glass: rgba(255, 255, 255, 0.05);
+            --glass-border: rgba(255, 255, 255, 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: #f1f5f9;
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Animated Background Mesh */
+        .mesh-bg {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            z-index: -1;
+            background: radial-gradient(circle at 0% 0%, #1e293b 0%, transparent 50%),
+                        radial-gradient(circle at 100% 100%, #0c4a6e 0%, transparent 50%);
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        section {
+            padding: 100px 0;
+        }
+
+        .glass-card {
+            background: var(--glass);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid var(--glass-border);
+            border-radius: 24px;
+            padding: 40px;
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+        }
+
+        /* --- Hero Section --- */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding-top: 50px;
+        }
+
+        .hero-img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            border: 3px solid var(--primary);
+            margin-bottom: 20px;
+            object-fit: cover;
+            box-shadow: 0 0 20px var(--primary);
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            margin-bottom: 10px;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero p {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 1.2rem;
+            color: #94a3b8;
+            margin-bottom: 30px;
+        }
+
+        /* --- NEW: Written Contact Details Bar --- */
+        .contact-details-bar {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 25px;
+            margin-top: 20px;
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 15px;
+            border: 1px dashed var(--glass-border);
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.9rem;
+            color: #cbd5e1;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .contact-item i {
+            color: var(--primary);
+        }
+
+        .contact-item:hover {
+            color: var(--secondary);
+        }
+
+        /* --- Skills Section --- */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-top: 40px;
+        }
+
+        .skill-item {
+            text-align: center;
+            padding: 20px;
+            transition: 0.3s;
+        }
+
+        .skill-item i {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            color: var(--primary);
+        }
+
+        .skill-item:hover {
+            transform: translateY(-5px);
+            color: var(--secondary);
+        }
+
+        /* --- Projects --- */
+        .project-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .project-card {
+            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .project-card:hover {
+            transform: scale(1.05);
+            border-color: var(--primary);
+        }
+
+        .project-card h3 {
+            color: var(--primary);
+            margin-bottom: 15px;
+        }
+
+        /* --- Contact Form --- */
+        .contact-form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        input, textarea {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--glass-border);
+            border-radius: 8px;
+            padding: 15px;
+            color: white;
+            outline: none;
+        }
+
+        input:focus, textarea:focus {
+            border-color: var(--primary);
+        }
+
+        button {
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            border: none;
+            padding: 15px;
+            border-radius: 8px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: opacity 0.3s;
+        }
+
+        button:hover {
+            opacity: 0.9;
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2.5rem; }
+            .contact-details-bar { flex-direction: column; align-items: flex-start; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="mesh-bg"></div>
+
+    <section class="hero container">
+        <div class="glass-card">
+            <img src="image.jpeg" alt="Profile" class="hero-img">
+            <h1>Sakshi</h1>
+            <p>> Frontend Developer | C++ Specialist</p>
+            
+            <div class="contact-details-bar">
+                <!-- <a href="https://mail.google.com/mail/u/0/?tab=rm&ogbl#inbox" class="contact-item"> -->
+                    <i class="fas fa-envelope"></i> sakshisgh4@gmail.com
+                </a>
+                <a href="tel:+1234567890" class="contact-item">
+                    <i class="fas fa-phone"></i> +91 9927326926
+                </a>
+                <a href="https://github.com/sakshisgh4-cloud" target="_blank" class="contact-item">
+                    <i class="fab fa-github"></i> https://github.com/sakshisgh4-cloud
+                </a>
+                <a href="https://linkedin.com/in/sakshisingh-cs" target="_blank" class="contact-item">
+                    <i class="fab fa-linkedin"></i> www.linkedin.com/in/sakshisingh-cs
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <section class="container" id="skills">
+        <h2 style="text-align: center; font-size: 2.5rem; margin-bottom: 20px;">The Toolkit</h2>
+        <div class="skills-grid">
+            <div class="skill-item glass-card"><i class="fab fa-html5"></i><h3>HTML5</h3></div>
+            <div class="skill-item glass-card"><i class="fab fa-css3-alt"></i><h3>CSS3</h3></div>
+            <div class="skill-item glass-card"><i class="fab fa-js"></i><h3>JavaScript</h3></div>
+            <div class="skill-item glass-card"><i class="fas fa-code"></i><h3>C++</h3></div>
+        </div>
+    </section>
+
+    <section class="container" id="projects">
+        <h2 style="text-align: center; font-size: 2.5rem; margin-bottom: 20px;">Featured Projects</h2>
+        <div class="project-grid">
+            <div class="glass-card project-card">
+                <h3>Algorithm Visualizer</h3>
+                <p>An interactive tool built with JS and C++ (WASM) to visualize complex sorting logic.</p>
+            </div>
+            <div class="glass-card project-card">
+                <h3>Glass UI Framework</h3>
+                <p>A CSS library focused on backdrop filters and modern frosted-glass aesthetics.</p>
+            </div>
+            <div class="glass-card project-card">
+                <h3>CLI Data Parser</h3>
+                <p>A high-speed file processing utility written in C++ for handling massive datasets.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="container" id="contact">
+        <div class="glass-card">
+            <h2 style="text-align: center; margin-bottom: 30px;">Contact Us</h2>
+            <form class="contact-form" id="contactForm">
+                <input type="text" placeholder="Full Name" required>
+                <input type="email" placeholder="Email Address" required>
+                <textarea rows="5" placeholder="Tell me about your project..." required></textarea>
+                <button type="submit">Send Message</button>
+            </form>
+        </div>
+    </section>
+
+    <footer style="text-align: center; padding: 40px; color: #64748b; font-size: 0.8rem;">
+        <p>&copy; 2024 Sakshi. Crafted with Code & Coffee.</p>
+    </footer>
+
+    <script>
+        // Form Handling
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Thank you! Your message has been sent successfully.');
+            this.reset();
+        });
+
+        // Entrance Animations
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.glass-card').forEach(card => {
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(30px)';
+            card.style.transition = 'all 0.8s cubic-bezier(0.2, 0.8, 0.2, 1)';
+            observer.observe(card);
+        });
+    </script>
+</body>
+</html>
